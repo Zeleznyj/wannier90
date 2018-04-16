@@ -46,10 +46,21 @@ serialobjs: $(OBJS)
 
 post: POSTOPTS = $(TEMP1)
 post: COMPILER = $(TEMP2)
+post x_matrix: POSTOPTS = $(TEMP1)  -warn all -check all -traceback
+post x_matrix: COMPILER = $(TEMP2)
+post s_matrix: POSTOPTS = $(TEMP1)  -warn all -check all -traceback
+post s_matrix: COMPILER = $(TEMP2)
+
 post: mpi_test ../../postw90.x
 
 ../../postw90.x: $(OBJS_POST) $(POSTDIR)postw90.F90
 	$(COMPILER) $(POSTDIR)postw90.F90 $(POSTOPTS) $(LDOPTS) $(OBJS_POST) $(LIBS) -o ../../postw90.x
+
+x_matrix: $(OBJS_POST) 
+	$(COMPILER) $(POSTDIR)x_matrix.F90 $(POSTOPTS) $(LDOPTS) $(OBJS_POST) $(LIBS) -o ../../x_matrix.x
+
+s_matrix: $(OBJS_POST) 
+	$(COMPILER) $(POSTDIR)s_matrix.F90 $(POSTOPTS) $(LDOPTS) $(OBJS_POST) $(LIBS) -o ../../s_matrix.x
 
 mpi_test :
 ifeq ($(COMMS),mpi)

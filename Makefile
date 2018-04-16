@@ -35,6 +35,12 @@ libs: lib
 post: objdirp
 	(cd $(ROOTDIR)/src/objp && $(MAKE) -f $(REALMAKEFILE) post)
 
+x_matrix: objdirp
+	(cd $(ROOTDIR)/src/objp && $(MAKE) -f $(REALMAKEFILE) x_matrix)
+
+s_matrix: objdirp
+	(cd $(ROOTDIR)/src/objp && $(MAKE) -f $(REALMAKEFILE) s_matrix)
+
 clean:
 	cd $(ROOTDIR) && rm -f *~
 	cd $(ROOTDIR) && rm -f src/*~
